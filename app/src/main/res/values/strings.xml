@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Party Games</string>
+    <string name="add">Add</string>
+    <string name="players_list">Players list</string>
+    <string name="quests_list">Quests list</string>
+    <string name="input_your_quest">Input your quest</string>
+    <string name="players">Players</string>
+    <string name="quests">Quests</string>
+    <string name="input_player_name">Input player name</string>
+    <string name="delete_item">Delete item</string>
+    <string name="start_game">Start game</string>
+    <string name="play_description">During the game, one player will get a random task from the prepared pool. \nOf course, the point is to complete the task, but the player can ask for a redraw. \nThe number of redraws depends only on the will of the host. It is also up to the host to accept the task as done. \n\nThe game isn\'t over until you finish it!</string>
+    <string name="quests_description">Together with the people you play with, come up with an ideas for quests and questions</string>
+    <string name="players_description">Add names/nicks of players you are plaing with</string>
+    <string name="play_title">Game process</string>
+    <string name="quests_title">Quests tab</string>
+    <string name="players_title">Players tab</string>
+    <string name="startup_description">You will become the host of the game, you moderate the quests and players. \nYou can also participate as a player!</string>
+    <string name="startup_title">Getting started</string>
+    <string name="play">play</string>
+    <string name="done">Done</string>
+    <string name="reroll">Reroll</string>
+    <string name="not_enough_alert">You don\'t have enough players or questions to start the game!\n</string>
+    <string name="questions">Questions</string>
+    <string name="required">required</string>
+    <string name="hint">Hint</string>
+    <string name="next">Next</string>
+    <string name="more">more</string>
+    <string name="and">and</string>
+    <string name="players_queue">Players queue</string>
+    <string name="empty_input_title">Empty input!</string>
+    <string name="empty_input_message">Input can not be empty</string>
+    <string name="quests_duplicate_title">Quests duplicate!</string>
+    <string name="quests_duplicate_message">This quest already exists and can not be repeated</string>
+    <string name="players_duplicate_title">Name exists!</string>
+    <string name="players_duplicate_message">This name is already taken and can not be repeated</string>
+</resources>
