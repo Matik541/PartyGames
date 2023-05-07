@@ -86,7 +86,7 @@ public class PlayActivity extends AppCompatActivity {
 		});
 
 		findViewById(R.id.rerollBtn).setOnClickListener(view -> {
-			questsList.add(playersList.get(0));
+			questsList.add(questsList.get(0));
 			questsList.remove(0);
 
 			update();
