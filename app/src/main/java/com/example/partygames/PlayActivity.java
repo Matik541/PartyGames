@@ -12,7 +12,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PlayActivity extends AppCompatActivity {
 
@@ -112,12 +115,30 @@ public class PlayActivity extends AppCompatActivity {
 
 
 		String quest = questsList.get(0);
-		while (quest.contains("_")) {
-			quest = quest.replaceFirst("_",
-				playersList.get(
+		while (
+			Pattern.compile("<@>|<(\\d{1,9})-(\\d{1,9})>").matcher(quest).find()
+		) {
+
+			// ping players
+			quest = quest.replaceFirst("<@>",
+				"@" + playersList.get(
 					random.nextInt(playersList.size() - 1) + 1
 				)
 			);
+
+			// add numbers
+			Matcher boundsMatcher = Pattern.compile("<(\\d+)-(\\d+)>").matcher(quest);
+			if (boundsMatcher.find()) {
+				int lowerBound = Integer.parseInt(
+					Objects.requireNonNull(boundsMatcher.group(1)));
+				int upperBound = Integer.parseInt(
+					Objects.requireNonNull(boundsMatcher.group(2)));
+
+				quest = boundsMatcher.replaceFirst(
+					String.valueOf(
+						random.nextInt(upperBound - lowerBound + 1) + lowerBound));
+			}
+
 		}
 
 		questContent.setText(quest);

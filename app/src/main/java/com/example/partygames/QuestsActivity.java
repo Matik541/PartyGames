@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,9 +88,24 @@ public class QuestsActivity extends AppCompatActivity {
 			return false;
 		});
 
+		findViewById(R.id.questsHintBtn).setOnClickListener(view -> new AlertDialog.Builder(this)
+			.setTitle("Quests hints")
+			.setMessage(
+				Html.fromHtml(
+					"<h5>Game mechanic:</h5>" +
+						"\tUse <strong>&lt;@&gt;</strong> to ping random player<br>" +
+						"\tUse <strong>&lt;min-max&gt;</strong> to get random number form min to max (1-9999999999)<br><br>" +
+						"<h5>Remember:</h5>" +
+						"\tmore quests = better gameplay<br>" +
+						"\tBe creative!<br>" +
+						"\tGood luck have fun!"
+				)
+			)
+			.show());
+
 //		findViewById(R.id.questsNavBtn_Q).setOnClickListener(view -> openIntent(QuestsActivity.class));
 		findViewById(R.id.playNavBtn_Q).setOnClickListener(view -> {
-			if (questsList.size() >= 5 && playersList.size() >= 3) {
+			if ( playersList.size() >= 3 && questsList.size() >= 5 ) {
 				openIntent(PlayActivity.class);
 			} else {
 				new AlertDialog.Builder(this)

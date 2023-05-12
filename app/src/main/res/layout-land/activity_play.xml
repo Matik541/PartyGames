@@ -11,9 +11,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="160dp"
+        android:layout_marginBottom="32dp"
         app:cardBackgroundColor="?android:attr/windowBackground"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
@@ -37,25 +37,26 @@
         android:id="@+id/doneBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/done"
         app:icon="@drawable/round_done_32"
-        app:layout_constraintBottom_toBottomOf="@+id/rerollBtn"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@+id/rerollBtn"
-        app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintStart_toEndOf="@+id/playersListBtn"
+        app:layout_constraintTop_toTopOf="@+id/playersListBtn" />
 
     <Button
         android:id="@+id/rerollBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/reroll"
         app:icon="@drawable/round_cached_32"
-        app:layout_constraintBottom_toBottomOf="@+id/doneBtn"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toEndOf="@+id/doneBtn"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toTopOf="@+id/doneBtn" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/currentPlayer"
@@ -83,10 +84,11 @@
         android:id="@+id/playersListBtn"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/players_list"
         app:layout_constraintBottom_toBottomOf="@+id/currentPlayer"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintEnd_toStartOf="@+id/doneBtn"
         app:layout_constraintStart_toEndOf="@+id/playersQueue"
         app:layout_constraintTop_toTopOf="@+id/currentPlayer"
         app:srcCompat="@drawable/round_people_32" />
