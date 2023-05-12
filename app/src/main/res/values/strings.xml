@@ -34,4 +34,18 @@
     <string name="quests_duplicate_message">This quest already exists and can not be repeated</string>
     <string name="players_duplicate_title">Name exists!</string>
     <string name="players_duplicate_message">This name is already taken and can not be repeated</string>
+    <string name="players_hints">Players hints</string>
+    <string name="quests_hints">Quests hints</string>
+    <string name="game_mechanic"><![CDATA[<h5>Game mechanic:</h5>]]></string>
+    <string name="get_random_min_max">to get random number form min to max (1–9999999999)</string>
+    <string name="ping_random_player">to ping random player</string>
+    <string name="use">Use</string>
+    <string name="remember">Remember</string>
+    <string name="be_creative">Be creative</string>
+    <string name="good_luck_have_fun">Good luck have fun</string>
+    <string name="more_quests_better_gameplay">more quests = better gameplay</string>
+    <string name="palyer_name_can_contain">Player\'s name can only contain</string>
+    <string name="unique_player_names">Player\'s name must be unique</string>
+    <string name="digits">digits</string>
+    <string name="upper_and_lower_case_letters">upper and lower case letters</string>
 </resources>

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,7 +47,7 @@ public class PlayersActivity extends AppCompatActivity {
 			EditText questInput = findViewById(R.id.playersTextInput);
 			String content = questInput.getText().toString();
 
-			if (content.equals("") ) {
+			if (content.equals("")) {
 				new AlertDialog.Builder(this)
 					.setTitle(R.string.empty_input_title)
 					.setMessage(R.string.empty_input_message)
@@ -85,6 +86,20 @@ public class PlayersActivity extends AppCompatActivity {
 			}
 			return false;
 		});
+
+		findViewById(R.id.playersHintBtn).setOnClickListener(view -> new AlertDialog.Builder(this)
+			.setTitle(R.string.players_hints)
+			.setMessage(
+				Html.fromHtml(
+					"\t" + getString(R.string.palyer_name_can_contain) + ": " +
+						getString(R.string.upper_and_lower_case_letters) + ", " +
+						getString(R.string.digits) + "," +
+						" . " + getString(R.string.and) +
+						" _ " + "<br>" +
+						"\t" + getString(R.string.unique_player_names) + "<br>"
+				)
+			)
+			.show());
 
 
 		findViewById(R.id.questsNavBtn_P).setOnClickListener(view -> openIntent(QuestsActivity.class));

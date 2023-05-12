@@ -89,23 +89,23 @@ public class QuestsActivity extends AppCompatActivity {
 		});
 
 		findViewById(R.id.questsHintBtn).setOnClickListener(view -> new AlertDialog.Builder(this)
-			.setTitle("Quests hints")
+			.setTitle(R.string.quests_hints)
 			.setMessage(
 				Html.fromHtml(
-					"<h5>Game mechanic:</h5>" +
-						"\tUse <strong>&lt;@&gt;</strong> to ping random player<br>" +
-						"\tUse <strong>&lt;min-max&gt;</strong> to get random number form min to max (1-9999999999)<br><br>" +
-						"<h5>Remember:</h5>" +
-						"\tmore quests = better gameplay<br>" +
-						"\tBe creative!<br>" +
-						"\tGood luck have fun!"
+					"<h5>" + getString(R.string.game_mechanic) + ":</h5>" +
+						"\t" + getString(R.string.use) + " <strong>&lt;@&gt;</strong>" + getString(R.string.ping_random_player) + "<br>" +
+						"\t" + getString(R.string.use) + "<strong>&lt;min-max&gt;</strong>" + getString(R.string.get_random_min_max) + "<br><br>" +
+						"<h5>" + getString(R.string.remember) + ":</h5>" +
+						"\t"+getString(R.string.more_quests_better_gameplay)+"<br>" +
+						"\t"+getString(R.string.be_creative)+"!<br>" +
+						"\t"+getString(R.string.good_luck_have_fun)+"!"
 				)
 			)
 			.show());
 
 //		findViewById(R.id.questsNavBtn_Q).setOnClickListener(view -> openIntent(QuestsActivity.class));
 		findViewById(R.id.playNavBtn_Q).setOnClickListener(view -> {
-			if ( playersList.size() >= 3 && questsList.size() >= 5 ) {
+			if (playersList.size() >= 3 && questsList.size() >= 5) {
 				openIntent(PlayActivity.class);
 			} else {
 				new AlertDialog.Builder(this)
