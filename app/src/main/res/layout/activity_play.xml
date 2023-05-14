@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
     tools:context=".PlayActivity">
 
     <androidx.cardview.widget.CardView
@@ -14,23 +15,32 @@
         android:layout_marginTop="160dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="160dp"
-        app:cardBackgroundColor="?android:attr/windowBackground"
         app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/questContent"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+            android:background="@drawable/card_background">
+
+            <TextView
+                android:id="@+id/questContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -85,6 +95,7 @@
         android:layout_height="48dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/players_list"
+        android:tint="?android:textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/currentPlayer"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toEndOf="@+id/playersQueue"

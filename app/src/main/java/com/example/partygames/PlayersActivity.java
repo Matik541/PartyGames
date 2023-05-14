@@ -2,6 +2,7 @@ package com.example.partygames;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,8 @@ import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -22,8 +25,9 @@ public class PlayersActivity extends AppCompatActivity {
 
 	static ArrayList<String> questsList;
 	static ArrayList<String> playersList;
+	ArrayList<RecyclerItem> recyclerList;
 	RecyclerView playersRecycler;
-	static PlayersAdapter playersAdapter;
+	static RecyclerAdapter recyclerAdapter;
 
 	SharedPreferences sharedPreferences;
 
@@ -37,9 +41,15 @@ public class PlayersActivity extends AppCompatActivity {
 		questsList = new ArrayList<>(sharedPreferences.getStringSet("quests", new HashSet<>()));
 		playersList = new ArrayList<>(sharedPreferences.getStringSet("players", new HashSet<>()));
 
+		recyclerList = new ArrayList<>();
+		for (String quest : playersList) {
+			recyclerList.add(new RecyclerItem(quest));
+		}
+
+
 		playersRecycler = findViewById(R.id.playersRecycler);
-		playersAdapter = new PlayersAdapter(this, playersList);
-		playersRecycler.setAdapter(playersAdapter);
+		recyclerAdapter = new RecyclerAdapter(this, recyclerList);
+		playersRecycler.setAdapter(recyclerAdapter);
 		playersRecycler.setLayoutManager(new LinearLayoutManager(this));
 
 		Button addPlayerBtn = findViewById(R.id.playersAddBtn);
@@ -59,11 +69,28 @@ public class PlayersActivity extends AppCompatActivity {
 					.show();
 				return;
 			}
+			if (content.matches(".*[<>].*")) {
+				new AlertDialog.Builder(this)
+					.setTitle(getString(R.string.invalid_name) + "!")
+					.setMessage(
+						Html.fromHtml(
+							getString(R.string.player_name_cant_contain) + ": " +
+								"<strong> &lt; </strong>" + getString(R.string.and) +
+								"<strong> &gt; </strong>",
+							HtmlCompat.FROM_HTML_MODE_COMPACT
+						)
+					)
+
+					.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
+
+					.setIcon(R.drawable.round_warning_32)
+					.show();
+				return;
+			}
 			if (playersList.contains(content)) {
 				new AlertDialog.Builder(this)
 					.setTitle(R.string.players_duplicate_title)
 					.setMessage(R.string.players_duplicate_message)
-
 
 					.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
 
@@ -73,10 +100,11 @@ public class PlayersActivity extends AppCompatActivity {
 			}
 
 			int pos = playersList.size();
-			playersList.add(content);
-			playersAdapter.notifyItemInserted(pos);
+			recyclerList.add(new RecyclerItem(content));
+			recyclerAdapter.notifyItemInserted(pos);
 			questInput.setText("");
-			sharedPreferences.edit().putStringSet("players", new HashSet<>(playersList)).apply();
+
+			updatePreferences();
 		});
 
 		findViewById(R.id.playersTextInput).setOnKeyListener((v, keyCode, event) -> {
@@ -91,20 +119,33 @@ public class PlayersActivity extends AppCompatActivity {
 			.setTitle(R.string.players_hints)
 			.setMessage(
 				Html.fromHtml(
-					"\t" + getString(R.string.palyer_name_can_contain) + ": " +
-						getString(R.string.upper_and_lower_case_letters) + ", " +
-						getString(R.string.digits) + "," +
-						" . " + getString(R.string.and) +
-						" _ " + "<br>" +
-						"\t" + getString(R.string.unique_player_names) + "<br>"
+					"\t" + getString(R.string.player_name_cant_contain) + ": " +
+						"<strong> &lt; </strong>" + getString(R.string.and) +
+						"<strong> &gt; </strong>" + "<br>" +
+						"\t" + getString(R.string.unique_player_names) + "<br>",
+					HtmlCompat.FROM_HTML_MODE_COMPACT
 				)
 			)
 			.show());
 
 
+		findViewById(R.id.deleteSelectedPlayersBtn).setOnClickListener(view -> new AlertDialog.Builder(this)
+			.setTitle(getString(R.string.remove_items) + "?")
+			.setMessage(R.string.remove_selected_items)
+
+			.setPositiveButton(R.string.remove, (dialog, which) -> {
+				int amount = recyclerAdapter.removeSelectedItems();
+				Snackbar.make(view, getString(R.string.removed) + ": " + amount + " " + getString(R.string.items), 2000).show();
+				updatePreferences();
+			})
+			.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel())
+
+			.show());
+
 		findViewById(R.id.questsNavBtn_P).setOnClickListener(view -> openIntent(QuestsActivity.class));
 		findViewById(R.id.playNavBtn_P).setOnClickListener(view -> {
-			if (questsList.size() >= 5 && playersList.size() >= 3) {
+			updatePreferences();
+			if (playersList.size() >= 3 && questsList.size() >= 5 ) {
 				openIntent(PlayActivity.class);
 			} else {
 				new AlertDialog.Builder(this)
@@ -112,7 +153,7 @@ public class PlayersActivity extends AppCompatActivity {
 					.setMessage(
 						getString(R.string.not_enough_alert) +
 							"\n" +
-							getString(R.string.questions) + ": " + questsList.size() +
+							getString(R.string.players) + ": " + playersList.size() +
 							" (" + getString(R.string.required) + " 3)\n" +
 							getString(R.string.questions) + ": " + questsList.size() +
 							" (" + getString(R.string.required) + " 5)\n"
@@ -120,7 +161,6 @@ public class PlayersActivity extends AppCompatActivity {
 
 					.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
 
-					.setIcon(R.drawable.round_warning_32)
 					.show();
 			}
 		});
@@ -129,14 +169,23 @@ public class PlayersActivity extends AppCompatActivity {
 
 	protected void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		sharedPreferences.edit().putStringSet("quests", new HashSet<>(questsList)).apply();
-		sharedPreferences.edit().putStringSet("players", new HashSet<>(playersList)).apply();
+
+		updatePreferences();
 	}
 
 	private void openIntent(Class<?> tClass) {
 		Intent intent = new Intent(this, tClass);
+
+		updatePreferences();
+
+		startActivity(intent);
+	}
+
+	private void updatePreferences() {
+		playersList.clear();
+		recyclerList.forEach(item -> playersList.add(item.getContent()));
+
 		sharedPreferences.edit().putStringSet("quests", new HashSet<>(questsList)).apply();
 		sharedPreferences.edit().putStringSet("players", new HashSet<>(playersList)).apply();
-		startActivity(intent);
 	}
 }

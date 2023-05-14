@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
                         .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
 
-                        .setIcon(R.drawable.round_warning_32)
                         .show();
             }
         });

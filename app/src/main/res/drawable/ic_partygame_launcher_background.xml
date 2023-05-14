@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:type="radial"
+        android:centerX="75%"
+        android:centerY="150%"
+        android:startColor="@color/ic_partygame_launcher_background_1"
+        android:endColor="@color/ic_partygame_launcher_background_2"
+        android:gradientRadius="150%"
+        />
+</shape>

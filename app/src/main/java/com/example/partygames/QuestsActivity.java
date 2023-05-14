@@ -1,10 +1,5 @@
 package com.example.partygames;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +10,14 @@ import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -22,8 +25,9 @@ public class QuestsActivity extends AppCompatActivity {
 
 	static ArrayList<String> questsList;
 	static ArrayList<String> playersList;
+	ArrayList<RecyclerItem> recyclerList;
 	RecyclerView questsRecycler;
-	static QuestsAdapter questsAdapter;
+	static RecyclerAdapter recyclerAdapter;
 
 	SharedPreferences sharedPreferences;
 
@@ -38,10 +42,12 @@ public class QuestsActivity extends AppCompatActivity {
 		questsList = new ArrayList<>(sharedPreferences.getStringSet("quests", new HashSet<>()));
 		playersList = new ArrayList<>(sharedPreferences.getStringSet("players", new HashSet<>()));
 
+		recyclerList = new ArrayList<>();
+		questsList.forEach(quest -> recyclerList.add(new RecyclerItem(quest)));
 
 		questsRecycler = findViewById(R.id.questsRecycler);
-		questsAdapter = new QuestsAdapter(this, questsList);
-		questsRecycler.setAdapter(questsAdapter);
+		recyclerAdapter = new RecyclerAdapter(this, recyclerList);
+		questsRecycler.setAdapter(recyclerAdapter);
 		questsRecycler.setLayoutManager(new LinearLayoutManager(this));
 
 		Button addQuestBtn = findViewById(R.id.questsAddBtn);
@@ -72,12 +78,12 @@ public class QuestsActivity extends AppCompatActivity {
 				return;
 			}
 
-			int pos = questsList.size();
-			questsList.add(content);
-			questsAdapter.notifyItemInserted(pos);
+			int pos = recyclerList.size();
+			recyclerList.add(new RecyclerItem(content));
+			recyclerAdapter.notifyItemInserted(pos);
 			questInput.setText("");
-			sharedPreferences.edit().putStringSet("quests", new HashSet<>(questsList)).apply();
 
+			updatePreferences();
 		});
 
 		findViewById(R.id.questsTextInput).setOnKeyListener((v, keyCode, event) -> {
@@ -93,18 +99,33 @@ public class QuestsActivity extends AppCompatActivity {
 			.setMessage(
 				Html.fromHtml(
 					"<h5>" + getString(R.string.game_mechanic) + ":</h5>" +
-						"\t" + getString(R.string.use) + " <strong>&lt;@&gt;</strong>" + getString(R.string.ping_random_player) + "<br>" +
+						"\t" + getString(R.string.use) + "<strong>&lt;@&gt;</strong>" + getString(R.string.ping_random_player) + "<br>" +
 						"\t" + getString(R.string.use) + "<strong>&lt;min-max&gt;</strong>" + getString(R.string.get_random_min_max) + "<br><br>" +
 						"<h5>" + getString(R.string.remember) + ":</h5>" +
-						"\t"+getString(R.string.more_quests_better_gameplay)+"<br>" +
-						"\t"+getString(R.string.be_creative)+"!<br>" +
-						"\t"+getString(R.string.good_luck_have_fun)+"!"
+						"\t" + getString(R.string.more_quests_better_gameplay) + "<br>" +
+						"\t" + getString(R.string.be_creative) + "!<br>" +
+						"\t" + getString(R.string.good_luck_have_fun) + "!",
+					HtmlCompat.FROM_HTML_MODE_COMPACT
 				)
 			)
 			.show());
 
+		findViewById(R.id.deleteSelectedQuestsBtn).setOnClickListener(view -> new AlertDialog.Builder(this)
+			.setTitle(getString(R.string.remove_items) + "?")
+			.setMessage(R.string.remove_selected_items)
+
+			.setPositiveButton(R.string.remove, (dialog, which) -> {
+				int amount = recyclerAdapter.removeSelectedItems();
+				Snackbar.make(view, getString(R.string.removed) + ": " + amount + " " + getString(R.string.items), 2000).show();
+				updatePreferences();
+			} )
+			.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel())
+
+			.show());
+
 //		findViewById(R.id.questsNavBtn_Q).setOnClickListener(view -> openIntent(QuestsActivity.class));
 		findViewById(R.id.playNavBtn_Q).setOnClickListener(view -> {
+			updatePreferences();
 			if (playersList.size() >= 3 && questsList.size() >= 5) {
 				openIntent(PlayActivity.class);
 			} else {
@@ -113,7 +134,7 @@ public class QuestsActivity extends AppCompatActivity {
 					.setMessage(
 						getString(R.string.not_enough_alert) +
 							"\n" +
-							getString(R.string.questions) + ": " + questsList.size() +
+							getString(R.string.players) + ": " + playersList.size() +
 							" (" + getString(R.string.required) + " 3)\n" +
 							getString(R.string.questions) + ": " + questsList.size() +
 							" (" + getString(R.string.required) + " 5)\n"
@@ -121,7 +142,6 @@ public class QuestsActivity extends AppCompatActivity {
 
 					.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
 
-					.setIcon(R.drawable.round_warning_32)
 					.show();
 			}
 		});
@@ -131,15 +151,23 @@ public class QuestsActivity extends AppCompatActivity {
 
 	protected void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		sharedPreferences.edit().putStringSet("quests", new HashSet<>(questsList)).apply();
-		sharedPreferences.edit().putStringSet("players", new HashSet<>(playersList)).apply();
+
+		updatePreferences();
 	}
 
 	private void openIntent(Class<?> tClass) {
 		Intent intent = new Intent(this, tClass);
-		sharedPreferences.edit().putStringSet("quests", new HashSet<>(questsList)).apply();
-		sharedPreferences.edit().putStringSet("players", new HashSet<>(playersList)).apply();
+
+		updatePreferences();
+
 		startActivity(intent);
 	}
 
+	private void updatePreferences() {
+		questsList.clear();
+		recyclerList.forEach(item -> questsList.add(item.getContent()));
+
+		sharedPreferences.edit().putStringSet("quests", new HashSet<>(questsList)).apply();
+		sharedPreferences.edit().putStringSet("players", new HashSet<>(playersList)).apply();
+	}
 }

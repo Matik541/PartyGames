@@ -1,0 +1,91 @@
+package com.example.partygames;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Paint;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.QuestViewHolder> {
+
+	private final LayoutInflater inflater;
+	private final ArrayList<RecyclerItem> items;
+
+	public RecyclerAdapter(Context context, ArrayList<RecyclerItem> items) {
+		inflater = LayoutInflater.from(context);
+		this.items = items;
+	}
+
+	public static class QuestViewHolder extends RecyclerView.ViewHolder {
+
+		public final TextView itemContent;
+		public final CheckBox itemCheckBox;
+
+		public final RecyclerAdapter questsAdapter;
+
+
+		public QuestViewHolder(@NonNull View itemView, RecyclerAdapter adapter) {
+			super(itemView);
+
+			itemContent = itemView.findViewById(R.id.itemContent);
+			itemCheckBox = itemView.findViewById(R.id.itemCheckBox);
+
+			questsAdapter = adapter;
+		}
+	}
+
+	@NonNull
+	@Override
+	public QuestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		View itemView = inflater.inflate(R.layout.recycler_item, parent, false);
+		return new QuestViewHolder(itemView, this);
+	}
+
+	@Override
+	public void onBindViewHolder(@NonNull QuestViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+		holder.itemContent.setText(items.get(getItemViewType(position)).getContent());
+		holder.itemCheckBox.setChecked(items.get(getItemViewType(position)).isChecked());
+
+
+		holder.itemCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
+			items.get(getItemViewType(position)).setChecked(compoundButton.isChecked());
+			if (compoundButton.isChecked()) {
+				holder.itemContent.setPaintFlags(holder.itemContent.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+			} else {
+				holder.itemContent.setPaintFlags(holder.itemContent.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+			}
+		});
+
+	}
+
+	@Override
+	public int getItemCount() {
+		return items.size();
+	}
+
+	public int getItemViewType(int position) {
+		return position;
+	}
+
+	public int removeSelectedItems() {
+		int amount = 0;
+
+		for (int i = items.size() - 1; i >= 0; i--)
+			if (items.get(i).isChecked()) {
+				amount++;
+				items.remove(i);
+				notifyItemRemoved(i);
+			}
+
+		return amount;
+	}
+}

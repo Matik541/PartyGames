@@ -4,7 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
     tools:context=".QuestsActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deleteSelectedQuestsBtn"
+        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/delete_selected"
+        android:scaleX=".75"
+        android:scaleY=".75"
+        app:layout_constraintBottom_toTopOf="@+id/questsHintBtn"
+        app:layout_constraintEnd_toEndOf="@+id/questsHintBtn"
+        app:layout_constraintStart_toStartOf="@+id/questsHintBtn"
+        app:srcCompat="@drawable/round_delete_24"
+        tools:ignore="RedundantDescriptionCheck,TouchTargetSizeCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/playNavBtn_Q"
@@ -49,27 +65,28 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/questsTextInput"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/playNavBtn_Q"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questsListLabel" />
 
     <EditText
         android:id="@+id/questsTextInput"
-        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints="quest"
+        android:background="@drawable/input_outline"
         android:ems="10"
         android:hint="@string/input_your_quest"
         android:inputType="text"
-        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/questsAddBtn"
         app:layout_constraintEnd_toStartOf="@+id/questsAddBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/questsAddBtn"
-        android:autofillHints="quest" />
+        app:layout_constraintTop_toTopOf="@+id/questsAddBtn" />
 
     <Button
         android:id="@+id/questsAddBtn"
@@ -79,10 +96,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
         android:text="@string/add"
-        app:layout_constraintBottom_toTopOf="@+id/playNavBtn_Q"
+        app:layout_constraintBottom_toBottomOf="@+id/questsRecycler"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/questsTextInput"
-        app:layout_constraintTop_toBottomOf="@+id/questsRecycler" />
+        app:layout_constraintStart_toEndOf="@+id/questsTextInput" />
 
     <TextView
         android:id="@+id/questsListLabel"
@@ -105,9 +121,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
+        android:contentDescription="@string/hint"
         app:layout_constraintBottom_toTopOf="@+id/questsAddBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/round_question_mark_32"
-        android:contentDescription="@string/hint" />
+        app:srcCompat="@drawable/round_question_mark_32" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

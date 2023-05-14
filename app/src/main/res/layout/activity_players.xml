@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
     tools:context=".PlayersActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -12,11 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:clickable="true"
+        android:contentDescription="@string/play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/playersNavBtn_P"
         app:layout_constraintStart_toEndOf="@+id/questsNavBtn_P"
-        app:srcCompat="@drawable/round_play_arrow_24"
-        android:contentDescription="@string/play" />
+        app:srcCompat="@drawable/round_play_arrow_24" />
 
     <Button
         android:id="@+id/questsNavBtn_P"
@@ -42,6 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/playNavBtn_P" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playersRecycler"
         android:layout_width="0dp"
@@ -49,25 +51,24 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/playersTextInput"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/playNavBtn_P"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playersListLabel" >
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/playersListLabel" />
 
     <EditText
         android:id="@+id/playersTextInput"
-        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints="name, username, userName, player, playerName"
+        android:autofillHints="quest"
+        android:background="@drawable/input_outline"
         android:ems="10"
-        android:hint="@string/input_player_name"
+        android:hint="@string/input_your_quest"
         android:inputType="text"
-        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/playersAddBtn"
         app:layout_constraintEnd_toStartOf="@+id/playersAddBtn"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,15 +76,15 @@
 
     <Button
         android:id="@+id/playersAddBtn"
+        style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
         android:text="@string/add"
-        app:layout_constraintBottom_toTopOf="@+id/playNavBtn_P"
+        app:layout_constraintBottom_toBottomOf="@+id/playersRecycler"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/playersTextInput"
-        app:layout_constraintTop_toBottomOf="@+id/playersRecycler" />
+        app:layout_constraintStart_toEndOf="@+id/playersTextInput" />
 
     <TextView
         android:id="@+id/playersListLabel"
@@ -110,5 +111,20 @@
         app:layout_constraintBottom_toTopOf="@+id/playersAddBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/round_question_mark_32" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deleteSelectedPlayersBtn"
+        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/delete_selected"
+        android:scaleX=".75"
+        android:scaleY=".75"
+        app:layout_constraintBottom_toTopOf="@+id/playersHintBtn"
+        app:layout_constraintEnd_toEndOf="@+id/playersHintBtn"
+        app:layout_constraintStart_toStartOf="@+id/playersHintBtn"
+        app:srcCompat="@drawable/round_delete_24"
+        tools:ignore="RedundantDescriptionCheck,TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

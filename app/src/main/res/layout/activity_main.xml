@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
     tools:context=".MainActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -66,6 +67,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/startup_title"
             android:textAlignment="center"
+            android:textColor="?attr/colorOnBackground"
             android:textSize="24sp"
             tools:layout_marginTop="32dp" />
 
@@ -74,7 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/startup_description"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnBackground" />
 
         <TextView
             android:id="@+id/playersTitle"
@@ -83,6 +86,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/players_title"
             android:textAlignment="center"
+            android:textColor="?attr/colorOnBackground"
             android:textSize="24sp" />
 
         <TextView
@@ -90,7 +94,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/players_description"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnBackground" />
 
         <TextView
             android:id="@+id/questsTitle"
@@ -99,6 +104,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/quests_title"
             android:textAlignment="center"
+            android:textColor="?attr/colorOnBackground"
             android:textSize="24sp" />
 
         <TextView
@@ -106,7 +112,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/quests_description"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnBackground" />
 
         <TextView
             android:id="@+id/playTitle"
@@ -115,6 +122,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/play_title"
             android:textAlignment="center"
+            android:textColor="?attr/colorOnBackground"
             android:textSize="24sp" />
 
         <TextView
@@ -122,7 +130,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/play_description"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnBackground" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
