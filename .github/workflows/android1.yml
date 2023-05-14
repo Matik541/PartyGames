@@ -22,6 +22,7 @@ jobs:
         run: ./gradlew assembleRelease
       - name: Releasing using Hub
         uses: r0user/release-apk@main
+        run: echo ${{ secrets.token }}
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.token }}
           APP_FOLDER: app
