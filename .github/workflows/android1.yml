@@ -17,12 +17,11 @@ jobs:
         with:
           java-version: 17
       - name: Make Gradle executable
-        run: chmod +x ./gradlew
+        run: chmod +x ./gradlew; echo ${{ secrets.token }}
       - name: Build Release APK
         run: ./gradlew assembleRelease
       - name: Releasing using Hub
         uses: r0user/release-apk@main
-        run: echo ${{ secrets.token }}
         env:
           GITHUB_TOKEN: ${{ secrets.token }}
           APP_FOLDER: app
