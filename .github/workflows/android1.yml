@@ -10,7 +10,7 @@ jobs:
   Gradle:
     runs-on: ubuntu-latest
     steps:
-      - run: ${{ secrets }} 
+      - run: echo ${{ secrets }} 
       - name: checkout code
         uses: actions/checkout@v2
       - name: setup jdk
