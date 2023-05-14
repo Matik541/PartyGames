@@ -10,7 +10,6 @@ jobs:
   Gradle:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ secrets }} 
       - name: checkout code
         uses: actions/checkout@v2
       - name: setup jdk
@@ -24,5 +23,5 @@ jobs:
       - name: Releasing using Hub
         uses: r0user/release-apk@main
         env:
-          GITHUB_TOKEN: ${{ secrets.token }}
+          GITHUB_TOKEN: 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
           APP_FOLDER: app
