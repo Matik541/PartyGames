@@ -127,7 +127,7 @@ public class QuestsActivity extends AppCompatActivity {
 		findViewById(R.id.playNavBtn_Q).setOnClickListener(view -> {
 			updatePreferences();
 			if (playersList.size() >= 3 && questsList.size() >= 5) {
-				openIntent(PlayActivity.class);
+				openIntent(GameSelectActivity.class);
 			} else {
 				new AlertDialog.Builder(this)
 					.setTitle(getString(R.string.start_game))
