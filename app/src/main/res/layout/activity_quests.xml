@@ -66,7 +66,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/playNavBtn_Q"
+        app:layout_constraintBottom_toTopOf="@+id/questsTextInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questsListLabel" />
@@ -95,7 +95,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
         android:text="@string/add"
-        app:layout_constraintBottom_toBottomOf="@+id/questsRecycler"
+        app:layout_constraintBottom_toTopOf="@+id/playNavBtn_Q"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/questsTextInput" />
 
@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/quests_list"
+        android:text="@string/quests"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/questsRecycler"
         app:layout_constraintEnd_toEndOf="parent"
@@ -124,5 +124,14 @@
         app:layout_constraintBottom_toTopOf="@+id/questsAddBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/round_question_mark_32" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/questsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/questsListLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/questsListLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

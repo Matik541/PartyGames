@@ -2,7 +2,6 @@ package com.example.partygames;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,18 +52,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.QuestV
 	public void onBindViewHolder(@NonNull QuestViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 		holder.itemContent.setText(items.get(getItemViewType(position)).getContent());
 		holder.itemCheckBox.setChecked(items.get(getItemViewType(position)).isChecked());
-
-
-		holder.itemCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
-			items.get(getItemViewType(position)).setChecked(compoundButton.isChecked());
-			if (compoundButton.isChecked()) {
-				holder.itemContent.setPaintFlags(holder.itemContent.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
-			} else {
-				holder.itemContent.setPaintFlags(holder.itemContent.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
-			}
-		});
-
 	}
 
 	@Override
@@ -76,6 +63,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.QuestV
 		return position;
 	}
 
+	public void setCheckedForAllItems(boolean checked) {
+		items.forEach(x -> x.setChecked(checked));
+		notifyItemRangeChanged(0, items.size());
+	}
 	public int removeSelectedItems() {
 		int amount = 0;
 
