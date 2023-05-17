@@ -52,23 +52,22 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/playNavBtn_P"
+        app:layout_constraintBottom_toTopOf="@+id/playersTextInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playersListLabel" />
 
     <EditText
         android:id="@+id/playersTextInput"
-        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:autofillHints="quest"
-        android:background="@drawable/input_outline"
         android:ems="10"
         android:hint="@string/input_your_quest"
         android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/playersAddBtn"
         app:layout_constraintEnd_toStartOf="@+id/playersAddBtn"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,9 +79,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/add"
-        app:layout_constraintBottom_toBottomOf="@+id/playersRecycler"
+        app:layout_constraintBottom_toTopOf="@+id/playNavBtn_P"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/playersTextInput" />
 

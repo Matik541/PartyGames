@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.questsNavBtn).setOnClickListener(view -> openIntent(QuestsActivity.class));
         findViewById(R.id.playNavBtn).setOnClickListener(view -> {
             if (questsList.size() >= 5 && playersList.size() >= 3) {
-                openIntent(PlayActivity.class);
+                openIntent(GameSelectActivity.class);
             }
             else {
                 new AlertDialog.Builder(this)

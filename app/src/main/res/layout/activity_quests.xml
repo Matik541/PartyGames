@@ -73,16 +73,15 @@
 
     <EditText
         android:id="@+id/questsTextInput"
-        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:autofillHints="quest"
-        android:background="@drawable/input_outline"
         android:ems="10"
         android:hint="@string/input_your_quest"
         android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/questsAddBtn"
         app:layout_constraintEnd_toStartOf="@+id/questsAddBtn"
         app:layout_constraintStart_toStartOf="parent"
