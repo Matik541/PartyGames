@@ -6,6 +6,7 @@ import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.text.Html;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -23,14 +25,20 @@ import java.util.HashSet;
 
 public class PlayersActivity extends AppCompatActivity {
 
+	int maxPlayers = 99;
+	boolean checked = false;
+
 	static ArrayList<String> questsList;
 	static ArrayList<String> playersList;
 	ArrayList<RecyclerItem> recyclerList;
 	RecyclerView playersRecycler;
 	static RecyclerAdapter recyclerAdapter;
 
+	TextView playersCount;
+
 	SharedPreferences sharedPreferences;
 
+	@SuppressLint("SetTextI18n")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,10 +50,10 @@ public class PlayersActivity extends AppCompatActivity {
 		playersList = new ArrayList<>(sharedPreferences.getStringSet("players", new HashSet<>()));
 
 		recyclerList = new ArrayList<>();
-		for (String quest : playersList) {
-			recyclerList.add(new RecyclerItem(quest));
-		}
+		playersList.forEach(quest -> recyclerList.add(new RecyclerItem(quest)));
 
+		playersCount = findViewById(R.id.playersCount);
+		playersCount.setText(recyclerList.size() + "/" + maxPlayers);
 
 		playersRecycler = findViewById(R.id.playersRecycler);
 		recyclerAdapter = new RecyclerAdapter(this, recyclerList);
@@ -62,10 +70,8 @@ public class PlayersActivity extends AppCompatActivity {
 					.setTitle(R.string.empty_input_title)
 					.setMessage(R.string.empty_input_message)
 
-
 					.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
 
-					.setIcon(R.drawable.round_warning_32)
 					.show();
 				return;
 			}
@@ -83,7 +89,6 @@ public class PlayersActivity extends AppCompatActivity {
 
 					.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
 
-					.setIcon(R.drawable.round_warning_32)
 					.show();
 				return;
 			}
@@ -94,7 +99,16 @@ public class PlayersActivity extends AppCompatActivity {
 
 					.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
 
-					.setIcon(R.drawable.round_warning_32)
+					.show();
+				return;
+			}
+			if (recyclerList.size() >= maxPlayers) {
+				new AlertDialog.Builder(this)
+					.setTitle(R.string.max_players_title)
+					.setMessage(R.string.max_players_message)
+
+					.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
+
 					.show();
 				return;
 			}
@@ -103,6 +117,8 @@ public class PlayersActivity extends AppCompatActivity {
 			recyclerList.add(new RecyclerItem(content));
 			recyclerAdapter.notifyItemInserted(pos);
 			questInput.setText("");
+
+			playersCount.setText(recyclerList.size() + "/" + maxPlayers);
 
 			updatePreferences();
 		});
@@ -113,6 +129,11 @@ public class PlayersActivity extends AppCompatActivity {
 				return true;
 			}
 			return false;
+		});
+
+		playersCount.setOnClickListener(view -> {
+			checked = !checked;
+			recyclerAdapter.setCheckedForAllItems(checked);
 		});
 
 		findViewById(R.id.playersHintBtn).setOnClickListener(view -> new AlertDialog.Builder(this)

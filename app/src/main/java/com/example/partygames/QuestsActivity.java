@@ -1,5 +1,6 @@
 package com.example.partygames;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.text.Html;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,14 +25,20 @@ import java.util.HashSet;
 
 public class QuestsActivity extends AppCompatActivity {
 
+	int maxQuests = 999;
+	boolean checked = false;
+
 	static ArrayList<String> questsList;
 	static ArrayList<String> playersList;
 	ArrayList<RecyclerItem> recyclerList;
 	RecyclerView questsRecycler;
 	static RecyclerAdapter recyclerAdapter;
 
+	TextView questCount;
+
 	SharedPreferences sharedPreferences;
 
+	@SuppressLint("SetTextI18n")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,6 +52,9 @@ public class QuestsActivity extends AppCompatActivity {
 
 		recyclerList = new ArrayList<>();
 		questsList.forEach(quest -> recyclerList.add(new RecyclerItem(quest)));
+
+		questCount = findViewById(R.id.questsCount);
+		questCount.setText(recyclerList.size() + "/" + maxQuests);
 
 		questsRecycler = findViewById(R.id.questsRecycler);
 		recyclerAdapter = new RecyclerAdapter(this, recyclerList);
@@ -77,11 +88,23 @@ public class QuestsActivity extends AppCompatActivity {
 					.show();
 				return;
 			}
+			if (recyclerList.size() >= maxQuests) {
+				new AlertDialog.Builder(this)
+					.setTitle(R.string.max_quests_title)
+					.setMessage(R.string.max_quests_message)
+
+					.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.cancel())
+
+					.show();
+				return;
+			}
 
 			int pos = recyclerList.size();
 			recyclerList.add(new RecyclerItem(content));
 			recyclerAdapter.notifyItemInserted(pos);
 			questInput.setText("");
+
+			questCount.setText(recyclerList.size() + "/" + maxQuests);
 
 			updatePreferences();
 		});
@@ -92,6 +115,11 @@ public class QuestsActivity extends AppCompatActivity {
 				return true;
 			}
 			return false;
+		});
+
+		questCount.setOnClickListener(view -> {
+			checked = !checked;
+			recyclerAdapter.setCheckedForAllItems(checked);
 		});
 
 		findViewById(R.id.questsHintBtn).setOnClickListener(view -> new AlertDialog.Builder(this)

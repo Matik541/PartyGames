@@ -30,6 +30,8 @@ public class PlayActivity extends AppCompatActivity {
 	TextView playersQueue;
 	TextView questContent;
 
+	String mode;
+
 	@SuppressLint("DefaultLocale")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,11 @@ public class PlayActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_play);
 
 		sharedPreferences = this.getSharedPreferences("com.example.partygames", Context.MODE_PRIVATE);
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			mode = extras.getString("mode");
+		}
 
 		questsList = new ArrayList<>(sharedPreferences.getStringSet("quests", new HashSet<>()));
 		playersList = new ArrayList<>(sharedPreferences.getStringSet("players", new HashSet<>()));

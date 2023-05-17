@@ -54,4 +54,8 @@
     <string name="invalid_name">Invalid name</string>
     <string name="content">Content</string>
     <string name="remove">Remove</string>
+    <string name="max_players_message">You reach players limit!</string>
+    <string name="max_players_title">Max players</string>
+    <string name="max_quests_message">You reach quests limit!</string>
+    <string name="max_quests_title">Max quests</string>
 </resources>

@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/players_list"
+        android:text="@string/players"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/playersRecycler"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,5 +125,14 @@
         app:layout_constraintStart_toStartOf="@+id/playersHintBtn"
         app:srcCompat="@drawable/round_delete_24"
         tools:ignore="RedundantDescriptionCheck,TouchTargetSizeCheck" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/playersCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/playersListLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/playersListLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
