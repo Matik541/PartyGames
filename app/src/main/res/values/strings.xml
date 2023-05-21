@@ -15,13 +15,12 @@
     <string name="play_title">Game process</string>
     <string name="quests_title">Quests tab</string>
     <string name="players_title">Players tab</string>
-    <string name="startup_description">You will become the host of the game, you moderate the quests and players. \nYou can also participate as a player!</string>
     <string name="startup_title">Getting started</string>
     <string name="play">play</string>
     <string name="done">Done</string>
     <string name="reroll">Reroll</string>
-    <string name="not_enough_alert">You don\'t have enough players or questions to start the game!\n</string>
-    <string name="questions">Questions</string>
+    <string name="not_enough_alert">"You don't have enough players or quests to start the game! "</string>
+    <string name="questions">Quests</string>
     <string name="required">required</string>
     <string name="hint">Hint</string>
     <string name="next">Next</string>
@@ -58,4 +57,21 @@
     <string name="max_players_title">Max players</string>
     <string name="max_quests_message">You reach quests limit!</string>
     <string name="max_quests_title">Max quests</string>
+    <string name="timeout">Timeout!</string>
+    <string name="is_out">is out!</string>
+    <string name="play_again">Play again</string>
+    <string name="leave">Leave</string>
+    <string name="game_over">Game over</string>
+    <string name="win">win</string>
+    <string name="startup_description">You will become the host of the game, you moderate the quests and players.  You can also participate as a player!</string>
+    <string name="choose_player">Choose player</string>
+    <string name="queue_mode">Queue mode</string>
+    <string name="choose_mode">Choose mode</string>
+    <string name="quick_mode">Quick mode</string>
+    <string name="queue">Queue</string>
+    <string name="quick">Quick</string>
+    <string name="choose">Choose</string>
+    <string name="queue_description">Easies game mode. \nPlayers are in looped queue. \nThere is no \"Game over\".</string>
+    <string name="quick_description">Something like \"Hot potato\". \nRound take 45–60s. \nGoal is to complete quests ASAP. \nOn timeout current player is out. \nLast player win!</string>
+    <string name="choose_description">Quite simple. \nAfter completing the quest, you choose either another player or yourself. \nPlayers queue doesn\'t matter here.</string>
 </resources>
