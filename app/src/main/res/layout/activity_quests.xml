@@ -81,6 +81,7 @@
         android:ems="10"
         android:hint="@string/input_your_quest"
         android:inputType="text"
+        android:maxLength="1000"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/questsAddBtn"
         app:layout_constraintEnd_toStartOf="@+id/questsAddBtn"

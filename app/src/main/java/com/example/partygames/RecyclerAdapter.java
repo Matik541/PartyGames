@@ -52,6 +52,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.QuestV
 	public void onBindViewHolder(@NonNull QuestViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 		holder.itemContent.setText(items.get(getItemViewType(position)).getContent());
 		holder.itemCheckBox.setChecked(items.get(getItemViewType(position)).isChecked());
+
+		holder.itemCheckBox.setOnCheckedChangeListener((compoundButton, b) -> items.get(getItemViewType(position)).setChecked(b));
 	}
 
 	@Override

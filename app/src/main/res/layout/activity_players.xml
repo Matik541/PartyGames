@@ -41,7 +41,8 @@
         android:text="@string/players"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/playNavBtn_P" />
+        app:layout_constraintStart_toEndOf="@+id/playNavBtn_P"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -67,6 +68,7 @@
         android:ems="10"
         android:hint="@string/input_your_quest"
         android:inputType="text"
+        android:maxLength="20"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/playersAddBtn"
         app:layout_constraintEnd_toStartOf="@+id/playersAddBtn"

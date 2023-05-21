@@ -12,7 +12,7 @@ public class GameSelectActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_select);
 
-		Intent intent = new Intent();
+		Intent intent = new Intent(this, PlayActivity.class);
 
 		findViewById(R.id.queueBtn).setOnClickListener(view -> {
 			intent.putExtra("mode", "queue");
