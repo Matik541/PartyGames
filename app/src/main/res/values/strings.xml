@@ -74,4 +74,6 @@
     <string name="queue_description">Easies game mode. \nPlayers are in looped queue. \nThere is no \"Game over\".</string>
     <string name="quick_description">Something like \"Hot potato\". \nRound take 45–60s. \nGoal is to complete quests ASAP. \nOn timeout current player is out. \nLast player win!</string>
     <string name="choose_description">Quite simple. \nAfter completing the quest, you choose either another player or yourself. \nPlayers queue doesn\'t matter here.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

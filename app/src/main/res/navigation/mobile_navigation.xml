@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation.xml">
+
+    <fragment
+        android:name="com.example.partygames.QuestsFragment"
+        android:label="@string/quests"
+        tools:layout="@layout/fragment_quests"
+        />
+
+    <fragment
+        android:name="com.example.partygames.HomeFragment"
+        android:label="home"
+        tools:layout="@layout/fragment_home"
+        />
+
+    <fragment
+        android:name="com.example.partygames.PlayersFragment"
+        android:label="@string/players"
+        tools:layout="@layout/fragment_players"
+        />
+
+</navigation>
