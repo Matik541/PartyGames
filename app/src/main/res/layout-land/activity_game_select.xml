@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
+    tools:context=".GameSelectActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/queueBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:clickable="true"
+        android:contentDescription="@string/queue_mode"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toTopOf="@+id/chooseBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/round_queue_64" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/chooseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:clickable="true"
+        android:contentDescription="@string/choose_mode"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toTopOf="@+id/quickBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/queueBtn"
+        app:srcCompat="@drawable/round_choosing_64" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/quickBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:clickable="true"
+        android:contentDescription="@string/quick_mode"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseBtn"
+        app:srcCompat="@drawable/round_quick_64" />
+
+    <TextView
+        android:id="@+id/queueLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/queue"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/queueDescription"
+        app:layout_constraintEnd_toStartOf="@+id/queueDescription"
+        app:layout_constraintTop_toTopOf="@+id/queueDescription" />
+
+    <TextView
+        android:id="@+id/queueLabel4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/quick"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/quickDescription"
+        app:layout_constraintEnd_toStartOf="@+id/quickDescription"
+        app:layout_constraintTop_toTopOf="@+id/quickDescription" />
+
+    <TextView
+        android:id="@+id/ChooseLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/choose"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/chooseDescription"
+        app:layout_constraintStart_toEndOf="@+id/chooseDescription"
+        app:layout_constraintTop_toTopOf="@+id/chooseDescription"
+        app:layout_constraintVertical_bias="0.432" />
+
+    <TextView
+        android:id="@+id/queueDescription"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="start"
+        android:maxWidth="300dp"
+        android:text="@string/queue_description"
+        app:layout_constraintBottom_toBottomOf="@+id/queueBtn"
+        app:layout_constraintEnd_toStartOf="@+id/queueBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/queueBtn" />
+
+    <TextView
+        android:id="@+id/quickDescription"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="start"
+        android:maxWidth="300dp"
+        android:text="@string/quick_description"
+        app:layout_constraintBottom_toBottomOf="@+id/quickBtn"
+        app:layout_constraintEnd_toStartOf="@+id/queueBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/quickBtn" />
+
+    <TextView
+        android:id="@+id/chooseDescription"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical|end"
+        android:maxWidth="300dp"
+        android:text="@string/choose_description"
+        app:layout_constraintBottom_toBottomOf="@+id/chooseBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/chooseBtn"
+        app:layout_constraintTop_toTopOf="@+id/chooseBtn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

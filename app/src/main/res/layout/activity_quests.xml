@@ -16,9 +16,9 @@
         android:contentDescription="@string/delete_selected"
         android:scaleX=".75"
         android:scaleY=".75"
-        app:layout_constraintBottom_toTopOf="@+id/questsHintBtn"
-        app:layout_constraintEnd_toEndOf="@+id/questsHintBtn"
-        app:layout_constraintStart_toStartOf="@+id/questsHintBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/questsHintBtn"
+        app:layout_constraintEnd_toStartOf="@+id/questsHintBtn"
+        app:layout_constraintTop_toTopOf="@+id/questsHintBtn"
         app:srcCompat="@drawable/round_delete_24"
         tools:ignore="RedundantDescriptionCheck,TouchTargetSizeCheck" />
 
@@ -66,6 +66,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
+        android:paddingBottom="48dp"
         app:layout_constraintBottom_toTopOf="@+id/questsTextInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

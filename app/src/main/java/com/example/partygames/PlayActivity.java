@@ -39,7 +39,7 @@ public class PlayActivity extends AppCompatActivity {
 	TextView timerView;
 
 	String mode;
-	int seconds;
+	int seconds = 0;
 	int choosen;
 
 	@SuppressLint("DefaultLocale")
@@ -60,6 +60,12 @@ public class PlayActivity extends AppCompatActivity {
 
 		Collections.shuffle(questsList);
 		Collections.shuffle(playersList);
+		if (savedInstanceState != null) {
+			questsList = savedInstanceState.getStringArrayList("quests");
+			playersList = savedInstanceState.getStringArrayList("players");
+			seconds = savedInstanceState.getInt("timer");
+		}
+
 
 		currentPlayer = findViewById(R.id.currentPlayer);
 		playersQueue = findViewById(R.id.playersQueue);
@@ -132,6 +138,11 @@ public class PlayActivity extends AppCompatActivity {
 				});
 			}
 			else {
+				if (mode.equals("quick")) {
+					seconds += 5;
+					refreshTimer();
+				}
+
 				playersList.add(playersList.get(0));
 				playersList.remove(0);
 
@@ -148,6 +159,19 @@ public class PlayActivity extends AppCompatActivity {
 
 			update();
 		});
+	}
+
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putStringArrayList("players", playersList);
+		outState.putStringArrayList("quests", questsList);
+		outState.putInt("timer", seconds);
+		super.onSaveInstanceState(outState);
+	}
+
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		questsList = savedInstanceState.getStringArrayList("quests");
+		playersList = savedInstanceState.getStringArrayList("players");
 	}
 
 	private void update() {
@@ -208,9 +232,14 @@ public class PlayActivity extends AppCompatActivity {
 	}
 
 	private void refreshTimer() {
-		seconds = random.nextInt(15) + 45;
+		if (timer != null) 
+			timer.cancel();
 
-		timer = new CountDownTimer(seconds*1000, 1000) {
+		if (seconds == 0)
+			seconds = random.nextInt(15) + 45;
+
+
+		timer = new CountDownTimer(seconds* 1000L, 1000) {
 			@SuppressLint("SetTextI18n")
 			@Override
 			public void onTick(long l) {
